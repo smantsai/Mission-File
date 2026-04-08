@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root BTCPP_format="4">
+<root BTCPP_format="4"
+      main_tree_to_execute="Main Tree">
+  <BehaviorTree ID="Bins">
+    <AlwaysSuccess/>
+  </BehaviorTree>
+
   <BehaviorTree ID="Gate Task">
     <AlwaysSuccess/>
   </BehaviorTree>
 
-  <BehaviorTree ID="Untitled">
+  <BehaviorTree ID="Main Tree">
+    <Sequence>
+      <SubTree ID="Gate Task"/>
+      <SubTree ID="Slalom"/>
+      <SubTree ID="Bins"/>
+      <SubTree ID="Octagon"/>
+      <SubTree ID="Return to Gate"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Octagon">
+    <AlwaysSuccess/>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Return to Gate">
+    <AlwaysSuccess/>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Slalom">
     <AlwaysSuccess/>
   </BehaviorTree>
 
