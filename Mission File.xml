@@ -55,7 +55,35 @@
   </BehaviorTree>
 
   <BehaviorTree ID="Octagon">
-    <AlwaysSuccess/>
+    <Repeat num_cycles="2"
+            _description="We need to repeat the action of finding the next item, grabbing it, surfacing with it, and then dropping it in the basket. However, it is unclear whether doing a repeat will suffice when we change the object that needs to be identified.">
+      <Sequence>
+        <DriveToWorldWaypointSeeking world_waypoint=""
+                                     waypoint_mask=""
+                                     object=""
+                                     confidence=""
+                                     _description="1. Manny locates the object on the supply table while driving to center&#10;2. We will measure to know how to get to the center&#10;    1. premeasured distance"/>
+        <TrackObjectWaypoint tracking_position=""
+                             waypoint_mask=""
+                             object=""
+                             tolerance=""
+                             hold_time=""
+                             _description="Manny moves to be above the object on the supply table"/>
+        <Idle _description="Grab Item"/>
+        <DriveToWorldWaypoint world_waypoint=""
+                              waypoint_mask=""
+                              tolerance=""
+                              hold_time=""
+                              _description="Manny surfaces with the item"/>
+        <TrackObjectWaypoint tracking_position=""
+                             waypoint_mask=""
+                             object=""
+                             tolerance=""
+                             hold_time=""
+                             _description="Position directly over the center of the basket"/>
+        <Idle _description="Drop item into basket"/>
+      </Sequence>
+    </Repeat>
   </BehaviorTree>
 
   <BehaviorTree ID="Return to Gate">
