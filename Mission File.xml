@@ -2,7 +2,35 @@
 <root BTCPP_format="4"
       main_tree_to_execute="Main Tree">
   <BehaviorTree ID="Bins">
-    <AlwaysSuccess/>
+    <Sequence>
+      <DriveToWorldWaypointSeeking world_waypoint=""
+                                   waypoint_mask=""
+                                   object=""
+                                   confidence=""
+                                   _description="Find the orange marker pointing to bins task."/>
+      <TrackObjectWaypoint tracking_position=""
+                           waypoint_mask=""
+                           object=""
+                           tolerance=""
+                           hold_time=""
+                           _description="Manny follows the orange marker to the Bins Task."/>
+      <Repeat num_cycles="2">
+        <Sequence>
+          <DriveToWorldWaypointSeeking world_waypoint=""
+                                       waypoint_mask=""
+                                       object=""
+                                       confidence=""
+                                       _description="Drive and find a bin"/>
+          <TrackObjectWaypoint tracking_position=""
+                               waypoint_mask=""
+                               object=""
+                               tolerance=""
+                               hold_time=""
+                               _description="Manny positions itself directly over bin."/>
+          <Idle _description="Send command to drop the marker."/>
+        </Sequence>
+      </Repeat>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Gate Task">
@@ -128,6 +156,7 @@
       <input_port name="confidence"
                   type="float">Threshold for successful object identification</input_port>
     </Action>
+    <Action ID="Idle"/>
     <Action ID="TrackObjectWaypoint">
       <input_port name="tracking_position"
                   type="std::vector&lt;float&gt;">[6x1] Target vector/orientation relative to Object k Frame</input_port>
