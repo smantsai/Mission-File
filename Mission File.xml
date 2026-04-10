@@ -10,31 +10,37 @@
       <DriveToWorldWaypoint world_waypoint=""
                             waypoint_mask=""
                             tolerance=""
-                            hold_time=""/>
+                            hold_time=""
+                            _description="Submerge Manny (go from surface to starting depth)"/>
       <DriveToWorldWaypointSeeking world_waypoint=""
                                    waypoint_mask=""
                                    object=""
-                                   confidence=""/>
+                                   confidence=""
+                                   _description="Manny drives to the starting position (premeasured beforehand) and locate the gate. Also store the gate coordinates for Return Gate Task."/>
       <TrackObjectWaypoint tracking_position=""
                            waypoint_mask=""
                            object=""
                            tolerance=""
-                           hold_time=""/>
+                           hold_time=""
+                           _description="Manny orients itself to the gate."/>
       <TrackObjectWaypoint tracking_position=""
                            waypoint_mask=""
                            object=""
                            tolerance=""
-                           hold_time=""/>
+                           hold_time=""
+                           _description="Find the side chosen (Search &amp; Rescue / Survey &amp; Repair) on the gate and orient itself in front of it. Store the side chosen."/>
       <TrackObjectWaypoint tracking_position=""
                            waypoint_mask=""
                            object=""
                            tolerance=""
-                           hold_time=""/>
+                           hold_time=""
+                           _description="Manny drives through the located gate."/>
       <DistanceTrick trick=""
                      trick_end_body_waypoint=""
                      waypoint_mask=""
                      tolerance=""
-                     hold_time=""/>
+                     hold_time=""
+                     _description="Optional, distance trick for points. Do while driving through the gate. If we do distance trick, don&apos;t do previous step."/>
     </Sequence>
   </BehaviorTree>
 
@@ -57,7 +63,35 @@
   </BehaviorTree>
 
   <BehaviorTree ID="Slalom">
-    <AlwaysSuccess/>
+    <Sequence>
+      <DriveToWorldWaypointSeeking world_waypoint=""
+                                   waypoint_mask=""
+                                   object=""
+                                   confidence=""
+                                   _description="Find the orange path marker pointing to slalom"/>
+      <TrackObjectWaypoint tracking_position=""
+                           waypoint_mask=""
+                           object=""
+                           tolerance=""
+                           hold_time=""
+                           _description="Follow the orange path marker to slalom"/>
+      <Repeat num_cycles="3"
+              _description="3 sets of pipes">
+        <Sequence>
+          <DriveToWorldWaypointSeeking world_waypoint=""
+                                       waypoint_mask=""
+                                       object=""
+                                       confidence=""
+                                       _description="Manny drives forward while looking for PVC pipes"/>
+          <TrackObjectWaypoint tracking_position=""
+                               waypoint_mask=""
+                               object=""
+                               tolerance=""
+                               hold_time=""
+                               _description="Manny drives forward X meters from the pipes."/>
+        </Sequence>
+      </Repeat>
+    </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
