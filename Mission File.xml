@@ -57,18 +57,12 @@
                            tolerance=""
                            hold_time=""
                            _description="Find the side chosen (Search &amp; Rescue / Survey &amp; Repair) on the gate and orient itself in front of it. Store the side chosen."/>
-      <TrackObjectWaypoint tracking_position=""
-                           waypoint_mask=""
-                           object=""
-                           tolerance=""
-                           hold_time=""
-                           _description="Manny drives through the located gate."/>
       <DistanceTrick trick=""
                      trick_end_body_waypoint=""
                      waypoint_mask=""
                      tolerance=""
                      hold_time=""
-                     _description="Optional, distance trick for points. Do while driving through the gate. If we do distance trick, don&apos;t do previous step."/>
+                     _description="Distance trick for points. Do while driving through the gate. &#10;&#10;If we don&apos;t do a distance trick, replace this node with a TrackObjectWaypoint node to just drive through the gate."/>
     </Sequence>
   </BehaviorTree>
 
