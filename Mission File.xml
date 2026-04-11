@@ -115,7 +115,24 @@
   </BehaviorTree>
 
   <BehaviorTree ID="Return to Gate">
-    <AlwaysSuccess/>
+    <Sequence>
+      <DriveToWorldWaypointSeeking world_waypoint=""
+                                   waypoint_mask=""
+                                   object=""
+                                   confidence=""
+                                   _description="Manny drives to approximately where the gate is. The coordinates should have been recorded and stored during Gate Task."/>
+      <TrackObjectWaypoint tracking_position=""
+                           waypoint_mask=""
+                           object=""
+                           tolerance=""
+                           hold_time=""
+                           _description="Position Manny facing the gate at gate."/>
+      <DriveToWorldWaypoint world_waypoint=""
+                            waypoint_mask=""
+                            tolerance=""
+                            hold_time=""
+                            _description="Drive through gate back to start."/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Slalom">
